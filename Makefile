@@ -11,8 +11,8 @@ down:
 build: 
 	$(DC) build
 
-pull: 
-	$(DC) pull
+#pull: 
+#	$(DC) pull
 
 
 #--- project ---
