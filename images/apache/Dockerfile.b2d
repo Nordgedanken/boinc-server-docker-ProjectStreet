@@ -31,7 +31,7 @@ COPY .bashrc /root/.bashrc
 
 #build configuration
 ENV PROJHOME=/root/project
-RUN ln -s $PROJHOME/boincserver.httpd.conf /etc/apache2/sites-enabled/boincserver.httpd.conf 
+RUN ln -s $PROJHOME/ProjectStreet.httpd.conf /etc/apache2/sites-enabled/ProjectStreet.httpd.conf 
 WORKDIR $PROJHOME
 
 #logrotate
