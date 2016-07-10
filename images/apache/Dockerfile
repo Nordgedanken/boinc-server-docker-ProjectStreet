@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y \
         mysql-client \
         python \
         rsyslog \
-        supervisor
+        supervisor \
+        curl \
+        nano
 
 #configure server
 RUN docker-php-ext-install mysqli \
