@@ -28,19 +28,19 @@ ENV USER=root PROJHOME=/root/project
 
 # make project
 RUN cd /root/boinc/tools \
-    && ./make_project --url_base http://www.boincserver.com \
-                      --project_host boincserver \
+    && ./make_project --url_base http://b31635cf.ngrok.io \
+                      --project_host ProjectStreet \
                       --db_host mysql \
                       --db_user root \
                       --no_db \
                       --no_query \
                       --project_root $PROJHOME \
-                      boincserver \
+                      ProjectStreet \
     && sed -i -e 's/Deny from all/Require all denied/g' \
            -e 's/Allow from all/Require all granted/g' \
-           -e '/Order/d' $PROJHOME/boincserver.httpd.conf \
+           -e '/Order/d' $PROJHOME/ProjectStreet.httpd.conf \
     && echo "admin:zJiQQ3OoIfehM" > $PROJHOME/html/ops/.htpasswd \
-    && rm -r $PROJHOME/log_boincserver
+    && rm -r $PROJHOME/log_ProjectStreet
 
 # project files
 RUN mkdir $PROJHOME/html/stats_archive
