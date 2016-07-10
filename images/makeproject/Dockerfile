@@ -39,7 +39,7 @@ RUN cd /root/boinc/tools \
     && sed -i -e 's/Deny from all/Require all denied/g' \
            -e 's/Allow from all/Require all granted/g' \
            -e '/Order/d' $PROJHOME/ProjectStreet.httpd.conf \
-    && echo "admin:zJiQQ3OoIfehM" > $PROJHOME/html/ops/.htpasswd \
+    && echo 'admin:$apr1$1WD6Y5z3$S.uU54R1EuMiczW6xl7JE.' > $PROJHOME/html/ops/.htpasswd \
     && rm -r $PROJHOME/log_ProjectStreet
 
 # project files
