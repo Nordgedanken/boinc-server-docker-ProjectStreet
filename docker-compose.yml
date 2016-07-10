@@ -21,7 +21,7 @@ services:
     build: 
       context: images/makeproject
       dockerfile: Dockerfile.b2d
-    hostname: boincserver
+    hostname: ProjectStreet
     network_mode: bridge
     links: 
      - mysql
@@ -33,7 +33,7 @@ services:
     build: 
       context: images/apache
       dockerfile: Dockerfile.b2d
-    hostname: boincserver
+    hostname: ProjectStreet
     network_mode: bridge
     links:
      - mysql
