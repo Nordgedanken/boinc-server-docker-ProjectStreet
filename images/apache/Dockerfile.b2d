@@ -70,17 +70,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   
 #Add nodejs apache proxy
 RUN a2enmod proxy && a2enmod proxy_http
-RUN echo "ProxyRequests Off
-   ProxyPreserveHost On
-   ProxyVia Full
-   <Proxy *>
-      Require all granted
-   </Proxy>
- 
-   <Location /auth>
-      ProxyPass http://127.0.0.1:8080/auth
-      ProxyPassReverse http://127.0.0.1:8080/auth
-   </Location>" >> /etc/apache2/sites-enabled/ProjectStreet.httpd.conf 
+RUN echo -e "ProxyRequests Off\n ProxyPreserveHost On\n ProxyVia Full\n <Proxy *>\n Require all granted\n </Proxy>\n\n <Location /auth>\n ProxyPass http://127.0.0.1:8080/auth\n ProxyPassReverse http://127.0.0.1:8080/auth \n </Location>" >> /etc/apache2/sites-enabled/ProjectStreet.httpd.conf 
    
 #get node server
 RUN git clone https://github.com/MTRNord/ProjectStreet_AppAuth.git /root/project/ProjectStreet_AppAuth
