@@ -80,4 +80,4 @@ RUN cd /root/project/ProjectStreet_AppAuth && npm install
 COPY wait_for_project /usr/bin/wait_for_project
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
-CMD ["node /root/project/ProjectStreet_AppAuth/server.js"]
+CMD ["/usr/local/bin/node /root/project/ProjectStreet_AppAuth/server.js"]
