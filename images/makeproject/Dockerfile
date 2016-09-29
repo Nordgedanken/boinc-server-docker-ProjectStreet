@@ -50,7 +50,8 @@ RUN cd /root/boinc/tools \
            -e '$a\ ProxyPassReverse http://127.0.0.1:8080/auth' \
            -e '$a\ </Location>' $PROJHOME/ProjectStreet.httpd.conf \
     && echo 'admin:$apr1$1WD6Y5z3$S.uU54R1EuMiczW6xl7JE.' > $PROJHOME/html/ops/.htpasswd \
-    && rm -r $PROJHOME/log_ProjectStreet
+    && rm -r $PROJHOME/log_ProjectStreet \
+    && sed -i -e '$a\ RedirectMatch ^/$ /ProjectStreet/' /etc/apache2/apache2.conf
 
 # project files
 RUN mkdir $PROJHOME/html/stats_archive
