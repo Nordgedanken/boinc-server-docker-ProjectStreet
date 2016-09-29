@@ -39,16 +39,16 @@ RUN cd /root/boinc/tools \
     && sed -i -e 's/Deny from all/Require all denied/g' \
            -e 's/Allow from all/Require all granted/g' \
            -e '/Order/d' \
-           -e 's/ProxyRequests Off/g' \
-           -e 's/ProxyPreserveHost On/g' \
-           -e 's/ProxyVia Full/g' \
-           -e 's/<Proxy *>/g' \
-           -e 's/Require all granted/g' \
-           -e 's/</Proxy>/g' \
-           -e 's/<Location /auth>/g' \
-           -e 's/ProxyPass http://127.0.0.1:8080/auth/g' \
-           -e 's/ProxyPassReverse http://127.0.0.1:8080/auth /g' \
-           -e 's/</Location>/g' $PROJHOME/ProjectStreet.httpd.conf \
+           -e '\$aProxyRequests Off\n' \
+           -e '\$aProxyPreserveHost On\n' \
+           -e '\$aProxyVia Full\n' \
+           -e '\$a<Proxy *>\n' \
+           -e '\$aRequire all granted\n' \
+           -e '\$a</Proxy>\n' \
+           -e '\$a<Location /auth>\n' \
+           -e '\$aProxyPass http://127.0.0.1:8080/auth\n' \
+           -e '\$aProxyPassReverse http://127.0.0.1:8080/auth\n' \
+           -e '\$a</Location>' $PROJHOME/ProjectStreet.httpd.conf \
     && echo 'admin:$apr1$1WD6Y5z3$S.uU54R1EuMiczW6xl7JE.' > $PROJHOME/html/ops/.htpasswd \
     && rm -r $PROJHOME/log_ProjectStreet
 
