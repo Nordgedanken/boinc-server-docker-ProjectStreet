@@ -2,17 +2,20 @@ FROM php:5.6.17-apache
 
 MAINTAINER Marius Millea <mariusmillea@gmail.com>
 
-#install packages 
+#install packages
 RUN apt-get update && apt-get install -y \
         cron \
         libjpeg62-turbo-dev \
         libpng12-dev \
+        libssl1.0.0 \
         mysql-client \
+        nano \
         python \
         rsyslog \
         supervisor \
-        curl \
-        nano
+        wget \
+    && wget https://git.io/psysh -O /usr/bin/psysh \
+    && chmod +x /usr/bin/psysh
 
 #configure server
 RUN docker-php-ext-install mysqli \
@@ -29,7 +32,7 @@ COPY .bashrc /root/.bashrc
 
 #build configuration
 ENV PROJHOME=/root/project
-RUN ln -s $PROJHOME/ProjectStreet.httpd.conf /etc/apache2/sites-enabled/ProjectStreet.httpd.conf 
+RUN ln -s $PROJHOME/ProjectStreet.httpd.conf /etc/apache2/sites-enabled/ProjectStreet.httpd.conf
 WORKDIR $PROJHOME
 
 #logrotate
@@ -37,6 +40,6 @@ COPY logrotate /etc/logrotate.d/boincserver
 RUN chmod 644 /etc/logrotate.d/boincserver
 
 #set up supervisor to run
-COPY wait_for_project /usr/bin/wait_for_project
+COPY start_project /usr/bin/start_project
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
