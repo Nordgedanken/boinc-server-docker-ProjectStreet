@@ -48,7 +48,7 @@ COPY db_dump_spec.xml $PROJHOME/
 COPY html $PROJHOME/html
 COPY bin $PROJHOME/bin
 
-# finish up 
+# finish up
 WORKDIR $PROJHOME
 COPY postbuild.py /root/
 CMD /root/postbuild.py

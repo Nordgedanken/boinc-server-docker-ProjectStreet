@@ -5,19 +5,19 @@ DC=docker-compose
 
 up: up-mysql post-makeproject up-apache
 
-down: 
+down:
 	$(DC) down
 
-build: 
+build:
 	$(DC) build
 
-pull: 
+pull:
 	$(DC) pull
 
 
 #--- project ---
 
-makeproject: 
+makeproject:
 	$(DC) build makeproject
 
 post-makeproject:
@@ -41,7 +41,7 @@ exec-apache:
 
 # --- mysql ---
 
-build-mysql: 
+build-mysql:
 	$(DC) build mysql
 
 up-mysql:
