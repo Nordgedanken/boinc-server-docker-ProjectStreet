@@ -37,7 +37,6 @@ COPY .bashrc /root/.bashrc
 
 #build configuration
 ENV PROJHOME=/root/project
-RUN ln -s $PROJHOME/ProjectStreet.httpd.conf /etc/apache2/sites-enabled/ProjectStreet.httpd.conf
 
 #logrotate
 COPY logrotate /etc/logrotate.d/boincserver
@@ -65,6 +64,7 @@ RUN apt-get update && apt-get install -y git
 #Add nodejs apache proxy
 RUN a2enmod proxy && a2enmod proxy_http
 RUN echo -e "ProxyRequests Off\n ProxyPreserveHost On\n ProxyVia Full\n <Proxy *>\n Require all granted\n </Proxy>\n\n <Location /auth>\n ProxyPass http://127.0.0.1:8080/auth\n ProxyPassReverse http://127.0.0.1:8080/auth \n </Location>" >> $PROJHOME/ProjectStreet.httpd.conf
+RUN ln -s $PROJHOME/ProjectStreet.httpd.conf /etc/apache2/sites-enabled/ProjectStreet.httpd.conf
 
 #get node server
 RUN mkdir -p /root/web/ && cd /root/web/ && git clone https://github.com/MTRNord/ProjectStreet_AppAuth.git
