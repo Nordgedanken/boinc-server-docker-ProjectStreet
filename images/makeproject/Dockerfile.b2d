@@ -52,6 +52,11 @@ RUN cd /root/boinc/tools \
     && echo 'admin:$apr1$1WD6Y5z3$S.uU54R1EuMiczW6xl7JE.' > $PROJHOME/html/ops/.htpasswd \
     && rm -r $PROJHOME/log_ProjectStreet
 
+# create boinc2docker app
+COPY boinc2docker /root/boinc2docker
+ENV PATH=/root/boinc2docker:$PATH
+# the vboxwrapper/iso/appver installed will be taken from boinc2docker/boinc2docker.yml
+RUN boinc2docker_create_app
 # project files
 RUN mkdir $PROJHOME/html/stats_archive
 COPY db_dump_spec.xml $PROJHOME/
