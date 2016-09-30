@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y \
         php5-mysql \
         pkg-config \
         python \
-        python-mysqldb
+        python-mysqldb \
+        python-yaml \
+        wget
 
 
 # get source and compile server
@@ -57,13 +59,14 @@ COPY boinc2docker /root/boinc2docker
 ENV PATH=/root/boinc2docker:$PATH
 # the vboxwrapper/iso/appver installed will be taken from boinc2docker/boinc2docker.yml
 RUN boinc2docker_create_app
+
 # project files
 RUN mkdir $PROJHOME/html/stats_archive
 COPY db_dump_spec.xml $PROJHOME/
 COPY html $PROJHOME/html
 COPY bin $PROJHOME/bin
 
-# finish up
+# finish up 
 WORKDIR $PROJHOME
 COPY postbuild.py /root/
 CMD /root/postbuild.py
