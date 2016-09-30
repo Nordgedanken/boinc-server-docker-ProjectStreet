@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y \
         php5-mysql \
         pkg-config \
         python \
-        python-mysqldb
+        python-mysqldb \
+        python-yaml \
+        wget
 
 
 # get source and compile server
@@ -50,8 +52,13 @@ RUN cd /root/boinc/tools \
            -e '$a\ ProxyPassReverse http://127.0.0.1:8080/auth' \
            -e '$a\ </Location>' $PROJHOME/ProjectStreet.httpd.conf \
     && echo 'admin:$apr1$1WD6Y5z3$S.uU54R1EuMiczW6xl7JE.' > $PROJHOME/html/ops/.htpasswd \
-    && rm -r $PROJHOME/log_ProjectStreet \
-    && sed -i -e '$a\ RedirectMatch ^/$ /ProjectStreet/' /etc/apache2/apache2.conf
+    && rm -r $PROJHOME/log_ProjectStreet
+
+# create boinc2docker app
+COPY boinc2docker /root/boinc2docker
+ENV PATH=/root/boinc2docker:$PATH
+# the vboxwrapper/iso/appver installed will be taken from boinc2docker/boinc2docker.yml
+RUN boinc2docker_create_app
 
 # project files
 RUN mkdir $PROJHOME/html/stats_archive
@@ -59,7 +66,7 @@ COPY db_dump_spec.xml $PROJHOME/
 COPY html $PROJHOME/html
 COPY bin $PROJHOME/bin
 
-# finish up
+# finish up 
 WORKDIR $PROJHOME
 COPY postbuild.py /root/
 CMD /root/postbuild.py
