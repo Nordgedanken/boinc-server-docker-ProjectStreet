@@ -75,4 +75,5 @@ RUN cd /root/web/ProjectStreet_AppAuth && npm install
 #set up supervisor to run
 COPY start_project /usr/bin/start_project
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY config.xml $PROJHOME/
 CMD ["/usr/bin/supervisord"]
