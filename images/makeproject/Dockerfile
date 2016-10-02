@@ -16,9 +16,7 @@ RUN apt-get update && apt-get install -y \
         php5-mysql \
         pkg-config \
         python \
-        python-mysqldb \
-        python-yaml \
-        wget
+        python-mysqldb
 
 
 # get source and compile server
@@ -30,35 +28,19 @@ ENV USER=root PROJHOME=/root/project
 
 # make project
 RUN cd /root/boinc/tools \
-    && ./make_project --url_base http://ProjectStreet.dynu.com \
-                      --project_host ProjectStreet \
+    && ./make_project --url_base http://www.boincserver.com \
+                      --project_host boincserver \
                       --db_host mysql \
                       --db_user root \
                       --no_db \
                       --no_query \
                       --project_root $PROJHOME \
-                      ProjectStreet \
+                      boincserver \
     && sed -i -e 's/Deny from all/Require all denied/g' \
            -e 's/Allow from all/Require all granted/g' \
-           -e '/Order/d' \
-           -e '$a\ ProxyRequests Off' \
-           -e '$a\ ProxyPreserveHost On' \
-           -e '$a\ ProxyVia Full' \
-           -e '$a\ <Proxy *>' \
-           -e '$a\ Require all granted' \
-           -e '$a\ </Proxy>' \
-           -e '$a\ <Location /auth>' \
-           -e '$a\ ProxyPass http://127.0.0.1:8080/auth' \
-           -e '$a\ ProxyPassReverse http://127.0.0.1:8080/auth' \
-           -e '$a\ </Location>' $PROJHOME/ProjectStreet.httpd.conf \
-    && echo 'admin:$apr1$1WD6Y5z3$S.uU54R1EuMiczW6xl7JE.' > $PROJHOME/html/ops/.htpasswd \
-    && rm -r $PROJHOME/log_ProjectStreet
-
-# create boinc2docker app
-COPY boinc2docker /root/boinc2docker
-ENV PATH=/root/boinc2docker:$PATH
-# the vboxwrapper/iso/appver installed will be taken from boinc2docker/boinc2docker.yml
-RUN boinc2docker_create_app
+           -e '/Order/d' $PROJHOME/boincserver.httpd.conf \
+    && echo "admin:zJiQQ3OoIfehM" > $PROJHOME/html/ops/.htpasswd \
+    && rm -r $PROJHOME/log_boincserver
 
 # project files
 RUN mkdir $PROJHOME/html/stats_archive

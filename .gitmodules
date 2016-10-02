@@ -1,6 +1,7 @@
 [submodule "images/makeproject/boinc2docker"]
 	path = images/makeproject/boinc2docker
-	url = https://github.com/marius311/boinc2docker.git
+	url = https://github.com/Nordgedanken/boinc2docker-gpu.git
+	branch = gpu
 [submodule "images/makeproject/boinc"]
 	path = images/makeproject/boinc
 	url = https://github.com/boinc/boinc.git
