@@ -29,7 +29,7 @@ services:
      - "project:/root/project.dst"
 
   apache:
-    image: boinc/server_apache:latest-b2d
+    image: boinc/server_apache:gpu-b2d
     build: 
       context: images/apache
       dockerfile: Dockerfile.b2d
