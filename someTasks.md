@@ -4,4 +4,4 @@
 
 #OpenCV
 ##GPU
-`bin/boinc2docker_create_work_gpu.py mtrnord/projectstreet_detection:latest sh -c "PYTHONPATH='/usr/lib/python2.7/dist-packages/' python face_detect.py abba.png haarcascade_frontalface_default.xml >> /root/shared/results/logs.txt""`
+`bin/boinc2docker_create_work_gpu.py mtrnord/projectstreet_detection:latest sh -c "PYTHONPATH='/usr/lib/python2.7/dist-packages/' python face_detect.py abba.png haarcascade_frontalface_default.xml >> /root/shared/results/logs.txt"`
