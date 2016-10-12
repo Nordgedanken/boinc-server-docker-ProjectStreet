@@ -4,4 +4,4 @@
 
 #OpenCV
 ##GPU
-`bin/boinc2docker_create_work.py mtrnord/projectstreet_detection:latest sh -c "PYTHONPATH='/usr/lib/python2.7/dist-packages/' ./generateHaarDetector_street.sh 2>&1 | tee /root/shared/results/logs.txt"`
+`bin/boinc2docker_create_work.py  --rsc_fpops_est 1000000000000 --delay_bound 14 mtrnord/projectstreet_detection:latest sh -c "./generateHaarDetector_street.sh 2>&1 | tee /root/shared/results/logs.txt"`
